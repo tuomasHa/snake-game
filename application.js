@@ -37,9 +37,12 @@ $(document).ready( function() {
   var settingMessage =  {
     messageType: "SETTING",
     options: {
-      "width": 700,
-      "height": 300
+      "width": canvasWidth + 260,
+      "height": canvasHeight + 10
       }
   };
   window.parent.postMessage(settingMessage, "*");
+
+  game.initialize();
+  game.start();
 });

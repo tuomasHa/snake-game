@@ -10,23 +10,23 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-4 menu-area">
-        <div class="player-score">
-          Your High Score: <span class="player-score-number"></span>
+      <div class="col-4" id="menu-area">
+        <div id="player-score">
+          Your High Score: <span id="player-score-number"></span>
         </div>
         <hr/>
-        <div class="settings">
+        <div id="settings">
           <h5>Options</h5>
           <div class="form-group">
             <label >Color:</label>
-            <select class="form-control player-color-select">
+            <select class="form-control" id="player-color-select">
               <option value="1">Blue</option>
             </select>
           </div>
         </div>
       </div>
-      <div class="col-8 game-area">
-        game here
+      <div class="col-8 nopadding" id="game-area">
+        <canvas id="game-area-canvas"></canvas>
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@
 
    <!-- Our scripts -->
   <script src="game.js"></script>
+  <script src="gfx.js"></script>
   <script src="menu.js"></script>
   <script src="application.js"></script>
 </body>

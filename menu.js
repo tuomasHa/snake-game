@@ -2,18 +2,18 @@
 
 //global settings object, initialized here
 var settings = {
-  color: 1
+  color: "blue"
 };
 
 //global object providing menu functionality
 var menu = {
 
   updatePlayerScore() {
-    $(".player-score-number").first().html(state.score);
+    $("#player-score-number").html(state.score);
   },
 
   updatePlayerColors() {
-    var select = $(".player-color-select").first();
+    var select = $("#player-color-select");
     var colors = [
       "blue",
       "green",
