@@ -43,6 +43,6 @@ $(document).ready( function() {
   };
   window.parent.postMessage(settingMessage, "*");
 
+  menu.initialize();
   game.initialize();
-  game.start();
 });

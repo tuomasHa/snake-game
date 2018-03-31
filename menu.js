@@ -8,6 +8,17 @@ var settings = {
 //global object providing menu functionality
 var menu = {
 
+  initialize() {
+    $("#start-game-button").click( function() {
+      this.disabled = true;
+      game.start();
+    });
+
+    $("#player-color-select").change( function () {
+      settings.color = $(this).val();
+    })
+  },
+
   updatePlayerScore() {
     $("#player-score-number").html(state.score);
   },
@@ -25,6 +36,10 @@ var menu = {
         select.append($("<option></option>").attr("value", color).text(capitalize(color)));
       }
     });
+  },
+
+  enableNewGame() {
+    $("#start-game-button")[0].disabled = false;
   }
 };
 

@@ -31,6 +31,11 @@ var game = {
     //create intervals
     graphics.drawSnake(this.snake);
     graphics.drawFood(this.food);
+
+  },
+
+  over() {
+    menu.enableNewGame();
   },
 
   createSnake() {
