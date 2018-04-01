@@ -22,7 +22,6 @@ var sound = {
     }
 
     audio.play = function () {
-      console.log(audio)
       if (audio.prop('paused')) {
         audio.prop("currentTime", 0);
         audio.trigger('play');
