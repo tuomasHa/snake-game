@@ -19,6 +19,10 @@ var menu = {
       settings.color = $(this).val();
     });
 
+    $("#sounds-mute-check").change( function () {
+      sound.muteSounds(this.checked);
+    });
+
     $('#game-over-modal').on('shown.bs.modal', function () {
       $("#game-over-modal-close").focus();
     });
@@ -26,6 +30,9 @@ var menu = {
     $('#game-over-modal').on('hidden.bs.modal', function () {
       $("#start-game-button").focus();
     });
+
+    //update sound mute gameState
+    sound.muteSounds($("#sounds-mute-check")[0].checked);
   },
 
   updatePlayerScore() {

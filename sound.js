@@ -22,7 +22,7 @@ var sound = {
     }
 
     audio.play = function () {
-      if (audio.prop('paused')) {
+      if (audio.prop('paused') && !sound.soundsMuted) {
         audio.prop("currentTime", 0);
         audio.trigger('play');
       }
@@ -33,5 +33,9 @@ var sound = {
     };
     this.container.append(audio);
     return audio;
+  },
+
+  muteSounds(mute) {
+    this.soundsMuted = mute;
   }
 }
