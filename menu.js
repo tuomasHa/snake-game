@@ -43,11 +43,12 @@ var menu = {
   gameOver(score) {
     $("#game-over-player-score").html(score);
     if (score > state.score) {
-      console.log("high score")
+      sound.highScore.play();
       state.score = score;
       this.updatePlayerScore();
       $("#game-over-modal-highscore-badge").show();
     } else {
+      sound.gameOver.play();
       $("#game-over-modal-highscore-badge").hide();
     }
     var unlocked = this.checkUnlocks(score);

@@ -67,6 +67,7 @@ var game = {
   initialize() {
 
     graphics.initialize();
+    sound.initialize();
 
     $(document).keydown(gameInput);
   },
@@ -189,7 +190,7 @@ var game = {
   checkFood(coordinates) {
     if (this.food.x == coordinates.x && this.food.y == coordinates.y) {
       this.score += 10;
-
+      sound.food.play();
       //set food as eaten
       this.food.x = -1;
       this.food.y = -1;
