@@ -17,7 +17,15 @@ var menu = {
 
     $("#player-color-select").change( function () {
       settings.color = $(this).val();
-    })
+    });
+
+    $('#game-over-modal').on('shown.bs.modal', function () {
+      $("#game-over-modal-close").focus();
+    });
+
+    $('#game-over-modal').on('hidden.bs.modal', function () {
+      $("#start-game-button").focus();
+    });
   },
 
   updatePlayerScore() {
