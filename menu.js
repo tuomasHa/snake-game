@@ -29,7 +29,8 @@ var menu = {
     var colors = [
       "blue",
       "green",
-      "yellow"
+      "yellow",
+      "red"
     ];
     select.empty();
     $.each(colors, function (i, color) {
@@ -39,8 +40,47 @@ var menu = {
     });
   },
 
-  enableNewGame() {
+  gameOver(score) {
+    $("#game-over-player-score").html(score);
+    if (score > state.score) {
+      console.log("high score")
+      state.score = score;
+      this.updatePlayerScore();
+      $("#game-over-modal-highscore-badge").show();
+    } else {
+      $("#game-over-modal-highscore-badge").hide();
+    }
+    var unlocked = this.checkUnlocks(score);
+    if (unlocked.length > 0) {
+      var unlockedList = $('#game-over-modal-unlocked-list').empty();
+      unlocked.forEach(function (e) {
+        var item = $('<li/>').html(e);
+        unlockedList.append(item);
+      });
+      this.updatePlayerColors();
+      $('#game-over-modal-unlocked').show();
+    } else {
+      $('#game-over-modal-unlocked').hide();
+    }
+    $('#game-over-modal').modal('show');
     $("#start-game-button")[0].disabled = false;
+  },
+
+  checkUnlocks(score) {
+    var unlocked = [];
+    if (!state.unlocks.colors.green && score >= 100) {
+      unlocked.push('Color: green');
+      state.unlocks.colors.green = true;
+    }
+    if (!state.unlocks.colors.yellow && score >= 300) {
+      unlocked.push('Color: yellow');
+      state.unlocks.colors.yellow = true;
+    }
+    if (!state.unlocks.colors.red && score >= 500) {
+      unlocked.push('Color: red');
+      state.unlocks.colors.red = true;
+    }
+    return unlocked;
   }
 };
 

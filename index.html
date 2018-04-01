@@ -33,6 +33,34 @@
     </div>
   </div>
 
+  <!-- Modal -->
+<div class="modal fade" id="game-over-modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="game-over-modal-title">Game Over</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span id="game-over-modal-score">
+          Your Score: <span id="game-over-player-score"></span>
+          <span id="game-over-modal-highscore-badge" class="badge badge-info">New Highscore!</span>
+        </span>
+        <span id="game-over-modal-unlocked">
+          <hr/>
+          You unlocked:
+          <ul id="game-over-modal-unlocked-list" class="text-success"></ul>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- jQuery and bootstrap requirements -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

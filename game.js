@@ -7,7 +7,8 @@ var state = {
       colors: {
         blue: true,
         green: false,
-        yellow: false
+        yellow: false,
+        red: false
       }
   }
 };
@@ -91,8 +92,7 @@ var game = {
 
   over() {
     this.running = false;
-    menu.enableNewGame();
-    console.log('game over', this.score)
+    menu.gameOver(this.score);
   },
 
   createSnake() {
@@ -133,12 +133,13 @@ var game = {
   },
 
   checkValidFood(food) {
+    var valid = true;
     this.snake.forEach( function (e) {
       if (e.x == food.x && e.y == food.y){
-        return false
+        valid = false
       }
     });
-    return true;
+    return valid;
   },
 
   movePlayer() {

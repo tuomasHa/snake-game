@@ -22,6 +22,9 @@ var graphics = {
 
   setGraphicsOptions(playerColor) {
     switch (playerColor) {
+      case "red":
+        this.snakeColor = "FireBrick";
+        break;
       case "yellow":
         this.snakeColor = "Yellow";
         break;
