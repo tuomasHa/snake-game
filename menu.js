@@ -11,6 +11,7 @@ var menu = {
   initialize() {
     $("#start-game-button").click( function() {
       this.disabled = true;
+      this.blur();
       game.start();
     });
 
