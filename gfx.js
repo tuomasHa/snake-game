@@ -7,6 +7,7 @@ var segmentSize = 20; //snake segment width and height
 var gameBackgroundColor = "LawnGreen";
 var foodColor = "Tomato";
 var eyeColor = "Black";
+var textColor = "Black";
 
 //global graphics object
 var graphics = {
@@ -35,7 +36,8 @@ var graphics = {
       default:
         this.snakeColor = "DarkTurquoise";
     }
-
+    var fontFamily = $("body").css("font-family");
+    this.context.font = "" + segmentSize + "px " + fontFamily;
   },
 
   clearScreen() {
@@ -54,27 +56,6 @@ var graphics = {
 
     this.drawEyes(snake, dir);
   },
-
-  /*drawTail(snake) {
-    switch (dir) {
-      case 'l':
-      case 'r':
-
-        break;
-      case 'u':
-      case 'd':
-
-        break;
-      default:
-
-    }
-    for (var i = snake.length - 2; i < snake.length; i++) {
-      var x = snake[i].x;
-      var y = snake[i].y;
-      var w = segmentSize;
-      var h = segmentSize - ((snake.length - i) * (segmentSize )
-    }
-  },*/
 
   drawEyes(snake, dir) {
     var x = snake[0].x;
@@ -101,7 +82,7 @@ var graphics = {
     }
     this.context.closePath();
     this.context.fill();
-    this.context.fillStyle = oldColor;
+    //this.context.fillStyle = oldColor;
   },
 
   drawFood(food) {
@@ -113,6 +94,11 @@ var graphics = {
       this.context.closePath();
       this.context.fill();
     }
+  },
+
+  drawScore(score) {
+    this.context.fillstyle = textColor;
+    this.context.strokeText("Score: " + score, 5, segmentSize);
   },
 
   getCanvasWidth() {

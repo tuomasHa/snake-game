@@ -26,6 +26,7 @@ function step() {
     graphics.clearScreen();
     graphics.drawSnake(game.snake, game.direction);
     graphics.drawFood(game.food);
+    graphics.drawScore(game.score);
   } else {
     clearInterval(game.stepInterval);
   }
