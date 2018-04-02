@@ -1,10 +1,9 @@
 "use strict";
 
 //constants
-var canvasWidth = 400;
-var canvasHeight = 400;
-var segmentSize = 20; //snake segment width and height
-var gameBackgroundColor = "LawnGreen";
+var canvasWidth = 500;
+var canvasHeight = 500;
+var segmentSize = 25; //snake segment width and height
 var foodColor = "Tomato";
 var eyeColor = "Black";
 var textColor = "Black";
@@ -18,10 +17,10 @@ var graphics = {
 
     this.canvas.width = canvasWidth;
     this.canvas.height = canvasHeight;
-    this.canvas.style.backgroundColor = gameBackgroundColor;
+    this.canvas.style.backgroundColor = "LawnGreen";
   },
 
-  setGraphicsOptions(playerColor) {
+  setGraphicsOptions(playerColor, level) {
     switch (playerColor) {
       case "red":
         this.snakeColor = "FireBrick";
@@ -36,8 +35,20 @@ var graphics = {
       default:
         this.snakeColor = "DarkTurquoise";
     }
+    switch (level) {
+      case "mountain":
+        this.levelColor = "DarkGray";
+        break;
+      case "underground":
+        this.levelColor = "#885800";
+        break;
+      case "grassland":
+      default:
+        this.levelColor = "LawnGreen";
+    }
+    this.canvas.style.backgroundColor = this.levelColor
     var fontFamily = $("body").css("font-family");
-    this.context.font = "" + segmentSize + "px " + fontFamily;
+    this.context.font = "20px " + fontFamily;
   },
 
   clearScreen() {
@@ -83,7 +94,6 @@ var graphics = {
     }
     this.context.closePath();
     this.context.fill();
-    //this.context.fillStyle = oldColor;
   },
 
   drawFood(food) {
@@ -98,8 +108,8 @@ var graphics = {
   },
 
   drawScore(score) {
-    this.context.fillstyle = textColor;
-    this.context.strokeText("Score: " + score, 5, segmentSize);
+    this.context.fillStyle = textColor;
+    this.context.fillText("Score: " + score, 5, 20);
   },
 
   getCanvasWidth() {

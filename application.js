@@ -23,7 +23,12 @@ var app = {
                   state.unlocks.colors[key] = unlocks.colors[key] || state.unlocks.colors[key];
                 });
               }
-
+              if (unlocks.levels) {
+                var levelKeys = Object.keys(state.unlocks.levels);
+                levelKeys.forEach( function(key) {
+                  state.unlocks.levels[key] = unlocks.levels[key] || state.unlocks.levels[key];
+                });
+              }
             }
 
           }
@@ -31,6 +36,7 @@ var app = {
           console.log(state);
           menu.updatePlayerScore();
           menu.updatePlayerColors();
+          menu.updateLevels();
           app.error = false;
           menu.alert(app.error);
         }
@@ -49,8 +55,8 @@ var app = {
     var settingMessage =  {
       messageType: "SETTING",
       options: {
-        width: graphics.getCanvasWidth() + 260,
-        height: graphics.getCanvasHeight() + 20
+        width: graphics.getCanvasWidth() + 300,
+        height: graphics.getCanvasHeight() + 30
         }
     };
     window.parent.postMessage(settingMessage, "*");

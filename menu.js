@@ -2,7 +2,8 @@
 
 //global settings object, initialized here
 var settings = {
-  color: "blue"
+  color: "blue",
+  level: "grassland"
 };
 
 //global object providing menu functionality
@@ -19,6 +20,10 @@ var menu = {
       settings.color = $(this).val();
     });
 
+    $("#level-select").change( function () {
+      settings.level = $(this).val();
+    });
+
     $("#sounds-mute-check").change( function () {
       sound.muteSounds(this.checked);
     });
@@ -26,6 +31,8 @@ var menu = {
     $('#help-modal').on('shown.bs.modal', function () {
       $("#help-modal-colors-unlocked").html(menu.countColors());
       $("#help-modal-colors-total").html(menu.countColors('all'));
+      $("#help-modal-levels-unlocked").html(menu.countLevels());
+      $("#help-modal-levels-total").html(menu.countLevels('all'));
       $("#game-over-modal-close").focus();
     });
 
@@ -64,6 +71,21 @@ var menu = {
     });
   },
 
+  updateLevels() {
+    var select = $("#level-select");
+    var levels = [
+      "grassland",
+      "underground",
+      "mountain"
+    ];
+    select.empty();
+    $.each(levels, function (i, level) {
+      if (state.unlocks.levels[level]) {
+        select.append($("<option></option>").attr("value", level).text(capitalize(level)));
+      }
+    });
+  },
+
   gameOver(score) {
     var save = false;
     $("#game-over-player-score").html(score);
@@ -89,6 +111,7 @@ var menu = {
         unlockedList.append(item);
       });
       this.updatePlayerColors();
+      this.updateLevels();
       $('#game-over-modal-unlocked').show();
     }
     else {
@@ -107,9 +130,17 @@ var menu = {
       unlocked.push('Color: green');
       state.unlocks.colors.green = true;
     }
+    if (!state.unlocks.levels.underground && score >= 200) {
+      unlocked.push('Level: underground');
+      state.unlocks.levels.underground = true;
+    }
     if (!state.unlocks.colors.yellow && score >= 300) {
       unlocked.push('Color: yellow');
       state.unlocks.colors.yellow = true;
+    }
+    if (!state.unlocks.levels.mountain && score >= 400) {
+      unlocked.push('Level: mountain');
+      state.unlocks.levels.mountain = true;
     }
     if (!state.unlocks.colors.red && score >= 500) {
       unlocked.push('Color: red');
@@ -121,8 +152,17 @@ var menu = {
   countColors(all) {
     var total = 0;
     Object.keys(state.unlocks.colors).forEach( function (key) {
-      console.log(key, state.unlocks.colors[key], all);
       if (state.unlocks.colors[key] || all) {
+        total += 1;
+      }
+    });
+    return total;
+  },
+
+  countLevels(all) {
+    var total = 0;
+    Object.keys(state.unlocks.levels).forEach( function (key) {
+      if (state.unlocks.levels[key] || all) {
         total += 1;
       }
     });

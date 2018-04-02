@@ -9,6 +9,11 @@ var state = {
         green: false,
         yellow: false,
         red: false
+      },
+      levels: {
+        grassland: true,
+        underground: false,
+        mountain: false
       }
   }
 };
@@ -83,7 +88,7 @@ var game = {
       };
       this.running = true;
 
-      graphics.setGraphicsOptions(settings.color);
+      graphics.setGraphicsOptions(settings.color, settings.level);
 
       this.createSnake();
 
