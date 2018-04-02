@@ -60,25 +60,26 @@ var graphics = {
   drawEyes(snake, dir) {
     var x = snake[0].x;
     var y = snake[0].y;
+    var block = segmentSize / 4;
     var oldColor = this.context.fillStyle;
     this.context.fillStyle = eyeColor;
     this.context.beginPath();
     switch (dir) {
       case 'l':
-        this.context.rect(x, y, segmentSize/4, segmentSize/4);
-        this.context.rect(x, y + 3*(segmentSize/4), segmentSize/4, segmentSize/4);
+        this.context.rect(x + block, y + 2, block, block);
+        this.context.rect(x + block, y + (3*block) - 2, block, block);
         break;
       case 'r':
-        this.context.rect(x + 3*(segmentSize/4), y, segmentSize/4, segmentSize/4);
-        this.context.rect(x + 3*(segmentSize/4), y + 3*(segmentSize/4), segmentSize/4, segmentSize/4);
+        this.context.rect(x + (2*block), y + 2, block, block);
+        this.context.rect(x + (2*block), y + 3*block -2, block, block);
         break;
       case 'u':
-        this.context.rect(x, y, segmentSize/4, segmentSize/4);
-        this.context.rect(x + 3*(segmentSize/4), y, segmentSize/4, segmentSize/4);
+        this.context.rect(x + 2, y + block, block, block);
+        this.context.rect(x + (3*block) - 2, y + block, block, block);
         break;
       case 'd':
-        this.context.rect(x, y + 3*(segmentSize/4), segmentSize/4, segmentSize/4);
-        this.context.rect(x + 3*(segmentSize/4), y + 3*(segmentSize/4), segmentSize/4, segmentSize/4);
+        this.context.rect(x + 2, y + (2*block), block, block);
+        this.context.rect(x + (3*block) - 2, y + (2*block), block, block);
     }
     this.context.closePath();
     this.context.fill();
