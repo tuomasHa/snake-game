@@ -7,7 +7,7 @@ var app = {
       console.log("Received message", evt.data);
       var msg = evt.data;
       if (msg) {
-        if (msg.messageType === "LOAD") {
+        if (msg.messageType == "LOAD") {
           if (msg.gameState) {
 
             //replace values if truthy (true), else keep old value
@@ -31,6 +31,12 @@ var app = {
           console.log(state);
           menu.updatePlayerScore();
           menu.updatePlayerColors();
+          app.error = false;
+          menu.alert(app.error);
+        }
+        else if (msg.messageType == "ERROR") {
+          app.error = msg.info || true;
+          menu.alert(app.error);
         }
       }
     });
@@ -44,19 +50,34 @@ var app = {
       messageType: "SETTING",
       options: {
         width: graphics.getCanvasWidth() + 260,
-        height: graphics.getCanvasHeight() + 10
+        height: graphics.getCanvasHeight() + 20
         }
     };
     window.parent.postMessage(settingMessage, "*");
+
+    //request load
+    var loadRequestMessage =  {
+      messageType: "LOAD_REQUEST"
+    };
+    window.parent.postMessage(loadRequestMessage, "*");
   },
 
   save() {
-    var saveMessage = {
-      messageType: "SAVE",
-      gameState: state
-    };
+    if (!this.error) {
+      var saveMessage = {
+        messageType: "SAVE",
+        gameState: state
+      };
+      window.parent.postMessage(saveMessage, "*");
+    }
+  },
 
-    window.parent.postMessage(saveMessage, "*");
+  postScore(score) {
+    var scoreMessage = {
+      messageType: "SCORE",
+      score: score
+    };
+    window.parent.postMessage(scoreMessage, "*");
   }
 }
 

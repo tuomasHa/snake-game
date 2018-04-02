@@ -31,6 +31,9 @@ var menu = {
       $("#start-game-button").focus();
     });
 
+    //initially hide alert
+    this.alert(false);
+
     //update sound mute gameState
     sound.muteSounds($("#sounds-mute-check")[0].checked);
   },
@@ -58,6 +61,8 @@ var menu = {
   gameOver(score) {
     var save = false;
     $("#game-over-player-score").html(score);
+    app.postScore(score);
+
     if (score > state.score) {
       save = true;
       sound.highScore.play();
@@ -105,6 +110,22 @@ var menu = {
       state.unlocks.colors.red = true;
     }
     return unlocked;
+  },
+
+  alert(error) {
+    var alert = $("#error-alert");
+    if (error) {
+      if (typeof error == 'string') {
+        console.error(error);
+      }
+      else {
+        console.error('Error loading game data!');
+      }
+      alert.show();
+    }
+    else {
+      alert.hide();
+    }
   }
 };
 

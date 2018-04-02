@@ -1,3 +1,7 @@
 #game-area {
-  padding-top: 5px;
+  padding-top: 10px;
+}
+
+#error-alert {
+  margin-top: 10px;
 }
