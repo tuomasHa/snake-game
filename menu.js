@@ -23,6 +23,12 @@ var menu = {
       sound.muteSounds(this.checked);
     });
 
+    $('#help-modal').on('shown.bs.modal', function () {
+      $("#help-modal-colors-unlocked").html(menu.countColors());
+      $("#help-modal-colors-total").html(menu.countColors('all'));
+      $("#game-over-modal-close").focus();
+    });
+
     $('#game-over-modal').on('shown.bs.modal', function () {
       $("#game-over-modal-close").focus();
     });
@@ -110,6 +116,17 @@ var menu = {
       state.unlocks.colors.red = true;
     }
     return unlocked;
+  },
+
+  countColors(all) {
+    var total = 0;
+    Object.keys(state.unlocks.colors).forEach( function (key) {
+      console.log(key, state.unlocks.colors[key], all);
+      if (state.unlocks.colors[key] || all) {
+        total += 1;
+      }
+    });
+    return total;
   },
 
   alert(error) {

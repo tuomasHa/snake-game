@@ -1,7 +1,21 @@
+
+/* game canvas */
 #game-area {
   padding-top: 10px;
 }
 
+/* loading error in menu */
 #error-alert {
   margin-top: 10px;
+}
+
+/* help button in menu */
+#help-button i::before {
+  font-size: 22px;
+}
+
+#help-modal .modal-body {
+  max-height: 220px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
