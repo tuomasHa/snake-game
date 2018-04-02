@@ -56,18 +56,22 @@ var menu = {
   },
 
   gameOver(score) {
+    var save = false;
     $("#game-over-player-score").html(score);
     if (score > state.score) {
+      save = true;
       sound.highScore.play();
       state.score = score;
       this.updatePlayerScore();
       $("#game-over-modal-highscore-badge").show();
-    } else {
+    }
+    else {
       sound.gameOver.play();
       $("#game-over-modal-highscore-badge").hide();
     }
     var unlocked = this.checkUnlocks(score);
     if (unlocked.length > 0) {
+      save = true;
       var unlockedList = $('#game-over-modal-unlocked-list').empty();
       unlocked.forEach(function (e) {
         var item = $('<li/>').html(e);
@@ -75,8 +79,12 @@ var menu = {
       });
       this.updatePlayerColors();
       $('#game-over-modal-unlocked').show();
-    } else {
+    }
+    else {
       $('#game-over-modal-unlocked').hide();
+    }
+    if (save) {
+      app.save();
     }
     $('#game-over-modal').modal('show');
     $("#start-game-button")[0].disabled = false;
